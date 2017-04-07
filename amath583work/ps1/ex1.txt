@@ -1,0 +1,32 @@
+-------------------------
+| AMATH 583 B, SP 2017  |
+| Problem Set #1        |
+| Hongxi JIN (1628292)  |
+-------------------------
+
+1. What is the complete string in your bash shell prompt when your working directory is /home/amath583/work?
+   Bash Shell Prompt = "amath583@" + Container ID + ":~/work$"
+   eg:  amath583@c2a07f74a6a9:~/work$
+   The container ID varies as exiting and running the docker container.
+
+2. What is the indicated host name of your amath583/base container? (You will need to find the right Linux command to execute for this.)
+   $ docker ps -a
+   CONTAINER ID               NAMES
+   c2a07f74a6a9        friendly_einstein
+   0476a40eee02        adoring_clarke
+   46a9697e5bcf        boring_kowalevski
+   56848a77be5c        pensive_agnesi
+   641751e74b1b        relaxed_pare
+   The container ID and the host name varies as exiting and running docker.
+
+3. How do you specify the name of an output file when you use the compiler?
+   $ c++ -c vsum.cpp -o vsum.out
+   $ c++ -c vsum2.cpp -o vsum2.out
+
+4. (583 only) Describe how you would separately compile the two files vsum2.cpp and vector.cpp into object files and link them to create an executable.
+   $ c++ -c vector.cpp -o vector.o
+   $ c++ -c vsum2.cpp -o vs2.o
+   $ c++ -o vector.o vs2.o -o vsum2_exe
+   $ ./vsum2_exe
+   In both "vsum2.cpp" and "vector.cpp", a header file "vector.h" is included.
+   The first two lines are to compile the source files into two object files, the third line is to create one executable file with the two object files, and the fourth lien is for try-out.
