@@ -34,9 +34,20 @@ vector<double> readVector(istream &inputStream)
     return num;
 }
 
-std::vector<double> randomVector(int n)
+vector<double> randomVector(int n)
 {
     vector<double> num(n);
+    
     for (int i = 0; i < n; ++i) num[i] = (double)rand() / rand();
+    
     return num;
+}
+
+double twoNorm(const vector<double> &x)
+{
+    double norm = 0.0;
+    
+    for (int i = 0; i < x.size(); ++i) norm += x[i] * x[i];
+    
+    return sqrt(norm);
 }
