@@ -1,0 +1,1 @@
+[1] Bi Cheng Gui.  "Basics of c++ File Flow(fstream, ifstream, ostream)" in blog.csdn.net, Sep. 27, 2009.  Online: <http://blog.csdn.net/bichenggui/article/details/4600153>, Apr. 07, 2007.
