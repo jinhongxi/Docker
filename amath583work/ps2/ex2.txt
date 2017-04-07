@@ -1,0 +1,28 @@
+---------------------------------------
+- Problem Set 2, AMATH 583 B, SP 2017 -
+- Hongxi JIN (1628292)                -
+---------------------------------------
+
+2. Warm up
+$ make test1
+say hello then goodbye
+Hello World
+Goodbye World
+done
+$ make test2
+say goodbye then hello
+Goodbye World
+Hello World
+done
+
+$ make assert1
+hello1: hello1.cpp:9: int main(): Assertion `1 == 0 && "This is never true"' failed.
+Makefile:20: recipe for target 'assert1' failed
+make: *** [assert1] Aborted
+$ make assert2
+Hello World
+$ make assert3
+hello3: hello3.cpp:10: int main(): Assertion `1 == 0 && "This is never true"' failed.
+Makefile:28: recipe for target 'assert3' failed
+make: *** [assert3] Aborted
+

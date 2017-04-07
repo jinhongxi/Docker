@@ -1,0 +1,29 @@
+hello: hello.cpp
+	@c++ hello.cpp -o hello
+
+goodbye: goodbye.cpp
+	@c++ goodbye.cpp -o goodbye
+
+test1: hello goodbye
+	@echo "say hello then goodbye"
+	@./hello
+	@./goodbye
+	@echo "done"
+
+test2: hello goodbye
+	@echo "say goodbye then hello"
+	@./goodbye
+	@./hello
+	@echo "done"
+
+assert1: hello1.cpp
+	@c++ hello1.cpp -o hello1
+	@./hello1
+
+assert2: hello2.cpp
+	@c++ hello2.cpp -o hello2
+	@./hello2
+
+assert3: hello3.cpp
+	@c++ hello3.cpp -o hello3
+	@./hello3
