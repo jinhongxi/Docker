@@ -9,4 +9,6 @@
 
 std::vector<double> readVector(std::istream &inputStream);
 
+std::vector<double> randomVector(int n);
+
 #endif

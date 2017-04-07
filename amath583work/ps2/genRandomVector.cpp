@@ -1,22 +1,6 @@
-#include <iostream>
-#include <stdlib.h>
-#include <string>
-#include <fstream>
+#include "amath583.h"
 
 using namespace std;
-
-void showSeq(int n, string outputFilename)
-{
-    if (string(outputFilename) == "") for (int m = 0; m < n; ++m) cout << m << endl;
-    else
-    {
-        ofstream outputfile;
-        
-        outputfile.open(outputFilename.c_str());
-        for (int m = 0; m < n; ++m) outputfile << m << endl;
-        outputfile.close();
-    }
-}
 
 int main(int argc, char* argv[])
 {
@@ -43,14 +27,15 @@ int main(int argc, char* argv[])
         
         if (argc == 2)
         {
-            showSeq(N, outputFilename);
+            vector<double> num = randomVector(N);
+            for (int i = 0; i < N; ++i) cout << num[i] << endl;
             return 0;
         }
         else
         {
             for (int i = 2; i < argc; ++i)
             {
-	      if (string(argv[i]) == "-o" && (argc <= i + 1 || string(argv[i + 1]) == "]"))
+                if (string(argv[i]) == "-o" && (argc <= i + 1 || string(argv[i + 1]) == "]"))
                 {
                     cout << "error -3: outputfile undeclared" << endl;
                     return -3;
@@ -58,7 +43,7 @@ int main(int argc, char* argv[])
                 else if (string(argv[i]) == "-o")
                 {
                     outputFilename = argv[i + 1];
-                    showSeq(N, outputFilename);
+                    vector<double> num = randomVector(N);
                     return 0;
                 }
             }
@@ -66,5 +51,6 @@ int main(int argc, char* argv[])
             return -4;
         }
     }
+    
     return 0;
 }
