@@ -1,8 +1,10 @@
 hello: hello.cpp
 	@c++ hello.cpp -o hello
+	@./hello
 
 goodbye: goodbye.cpp
 	@c++ goodbye.cpp -o goodbye
+	@./goodbye
 
 test1: hello goodbye
 	@echo "say hello then goodbye"
@@ -28,11 +30,20 @@ assert3: hello3.cpp
 	@c++ hello3.cpp -o hello3
 	@./hello3
 
-main.exe: main.o amath583.o
-	c++ -g main.o amath583.o -o main.exe
+amath583.o: amath583.cpp
+	@c++ -c amath583.cpp -o amath583.o
 
-main.o: main.cpp amath583.hpp
-	c++ -g -std=c++11 -Wall -c main.cpp -o main.o
+seq: seq.cpp
+	@c++ seq.cpp -o seq
 
-amath583.o: amath583.cpp amath583.hpp
-	c++ -g std=c++11 -Wall -c amath583.cpp -o amath583.o
+readVector: readVector.cpp amath583.o
+	@c++ readVector.cpp amath583.o -o readVector
+
+genRandomVector: genRandomVector.cpp amath583.o
+	@c++ genRandomVector.cpp amath583.o -o genRandomVector
+
+twoNorm: twoNorm.cpp amath583.o
+	@c++ twoNorm.cpp amath583.o -o twoNorm
+
+dot583: dot583.cpp amath583.o
+	@c++ dot583.cpp amath583.o -o dot583

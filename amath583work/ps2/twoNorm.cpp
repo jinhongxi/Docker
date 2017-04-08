@@ -4,10 +4,18 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    int n = 0;
+    if (argc < 2 || string(argv[1]) == "0")
+    {
+        cout << "Usage: " << argv[0] << " N" << endl;
+        return 0;
+    }
     
-    if (argc < 2 || string(argv[1]) == "0") n = rand();
-    else n = atoi(argv[1]);
+    int n = atoi(argv[1]);
+    if (n <= 0)
+    {
+        cout << "error -2: invalid number N" << endl;
+        return -2;
+    }
 
     vector<double> x = randomVector(n);
     sort(x.begin(), x.end());
