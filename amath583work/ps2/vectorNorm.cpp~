@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     sort(x.rbegin(), x.rend());
     double n2 = twoNorm(x);
     cout << n1 << " " << n2 << " " << (n1 - n2) << endl;
+    cout << sqrt(x[n-1]) << endl;
     
     return 0;
 }

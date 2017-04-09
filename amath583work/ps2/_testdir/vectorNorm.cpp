@@ -1,0 +1,28 @@
+#include "amath583.hpp"
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+    if (argc < 2 || string(argv[1]) == "0")
+    {
+        cout << "Usage: " << argv[0] << " N" << endl;
+        return 0;
+    }
+    
+    int n = atoi(argv[1]);
+    if (n <= 0)
+    {
+        cout << "error -2: invalid number N" << endl;
+        return -2;
+    }
+
+    vector<double> x = randomVector(n);
+    sort(x.begin(), x.end());
+    double n1 = twoNorm(x);
+    sort(x.rbegin(), x.rend());
+    double n2 = twoNorm(x);
+    cout << n1 << " " << n2 << " " << (n1 - n2) << endl;
+    
+    return 0;
+}

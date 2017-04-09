@@ -4,7 +4,5 @@
 ---------------------------------------
 
 1. At what size N does your Euclidean norm start to exhibit unexpected results? What is the approximate magnitude of the unexpected result? Explain.
-At the size ____, the Euclidean norm jumps to zero suddenly.  This is probabilly caused by the fact that when compared with the sum, the entry is small, system stops adding up.  
 
 2. Is this going to be a problem with our realization of vector spaces as vector<double>?
-According to the properties of a vector space, the Euclidean norm need to satisfy that E2[x] = 0 iff x = 0.  That means at size ___, the Euclidean norm can not be operated on a vector space anymore.  

@@ -1,5 +1,5 @@
-#ifndef AMATH583_H
-#define AMATH583_H
+#ifndef AMATH583_HPP
+#define AMATH583_HPP
 
 #include <iostream>
 #include <cstring>
