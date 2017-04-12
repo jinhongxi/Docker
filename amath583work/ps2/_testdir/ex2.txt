@@ -4,6 +4,9 @@
 ---------------------------------------
 
 1. At what size N does your Euclidean norm start to exhibit unexpected results? What is the approximate magnitude of the unexpected result? Explain.
-At size 72, the difference between n1(ascending order) and n2(descending order) becomes a non-zero value.  The approximate magnitude of the unexpected result is about 5.0043.  This is probably caused because as the sum
+double: the difference between n1 and n2 increases as increasing N, but mostly smaller than e-10
+floating point: after about N = 50,000,000, n1 = 4096 and n2 is smaller than what’s expected to be.  For the case N = 50,000,000, n1 = 4096, n2 = 3469.45, and the Euclidean norm should be n = 4081.92
+This is probably caused by the inaccuracy of floating point, where double takes 8-bytes and stores more values than a 4-bytes floating point.  
 
 2. Is this going to be a problem with our realization of vector spaces as vector<double>?
+It’s going to be a problem for vector spaces as vector<float>, but do not have much influence on vector<double> spaces.

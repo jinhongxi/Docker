@@ -106,6 +106,15 @@ double twoNorm(const vector<double> &x)
     return sqrt(sum);
 }
 
+float twoNorm(const vector<float> &x)
+{
+    float sum = 0.0;
+    
+    for (int i = 0; i < x.size(); ++i) sum += x[i] * x[i];
+    
+    return sqrt(sum);
+}
+
 double dot583(const vector<double> &x, const vector<double> &y)
 {
     if (x.size() != y.size()) exit(-1);
@@ -115,4 +124,33 @@ double dot583(const vector<double> &x, const vector<double> &y)
     for (int i = 0; i < x.size(); ++i) sum += x[i] * y[i];
     
     return sum;
+}
+
+float dot583(const vector<float> &x, const vector<float> &y)
+{
+    if (x.size() != y.size()) exit(-1);
+    
+    float sum = 0.0;
+    
+    for (int i = 0; i < x.size(); ++i) sum += x[i] * y[i];
+    
+    return sum;
+}
+
+std::vector<float> dtof(const std::vector<double> &x)
+{
+    vector<float> num(x.size());
+    
+    for (int i = 0; i < x.size(); ++i) num[i] = (float)x[i];
+    
+    return num;
+}
+
+std::vector<double> ftod(const std::vector<float> &x)
+{
+    vector<double> num(x.size());
+    
+    for (int i = 0; i < x.size(); ++i) num[i] = (double)x[i];
+    
+    return num;
 }
