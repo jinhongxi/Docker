@@ -1,0 +1,9 @@
+---------------------------------------
+- Problem Set 2, AMATH 583 B, SP 2017 -
+- Hongxi JIN (1628292)                -
+---------------------------------------
+
+1. At what size N does your Euclidean norm start to exhibit unexpected results? What is the approximate magnitude of the unexpected result? Explain.
+At size 72, the difference between n1(ascending order) and n2(descending order) becomes a non-zero value.  The approximate magnitude of the unexpected result is about 5.0043.  This is probably caused because as the sum
+
+2. Is this going to be a problem with our realization of vector spaces as vector<double>?

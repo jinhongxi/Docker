@@ -1,0 +1,10 @@
+---------------------------------------
+- Problem Set 2, AMATH 583 B, SP 2017 -
+- Hongxi JIN (1628292)                -
+---------------------------------------
+
+1. At what size N does your Euclidean norm start to exhibit unexpected results? What is the approximate magnitude of the unexpected result? Explain.
+At the size 71, the difference between n1 and n2 becomes non-zero suddenly.  This is probabilly caused by the fact that when compared with the sum, the entry is small, system stops adding up.  
+
+2. Is this going to be a problem with our realization of vector spaces as vector<double>?
+At size 71, the Euclidean norm cannot sum up, thus, the value of the L2 norm do not be exactly correct and therefore cannot operate on a vector space anymore.
