@@ -30,17 +30,15 @@ private:
 #else
 class Matrix {
 public: 
-    Matrix(int M, int N) : iRows(M), jCols(N), arrayData(iRows, std::vector<double>(jCols)) {}
-    
-    double &operator()(int i, int j)       { return arrayData[i][j]; }
-    const double &operator()(int i, int j) const { return arrayData[i][j]; }
-    
-    int numRows() const { return iRows; }
-    int numCols() const { return jCols; }
+//----------------------------------------------------------------
+// Your implemenation goes here.
+// Note that you can also ifdef particular parts of the above
+// You should provide all the same member functions
+//----------------------------------------------------------------
 
 private:
   int iRows, jCols;
-  std::vector<std::vector<double> > arrayData;
+  std::vector<std::vector<double> >arrayData;
 };
 
 #endif // ALTMATRIX

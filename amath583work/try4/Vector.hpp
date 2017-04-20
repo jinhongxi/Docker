@@ -12,14 +12,16 @@
 #define VECTOR_HPP
 
 #include <vector>
-#include "Matrix.hpp"
 
 class Vector {
 public:
-  Vector(int M) : iRows(M), arrayData(iRows) {}
+  Vector(int M) : iRows(M), arrayData(M) {}
 
-    double &operator()(int i)       { return arrayData[i]; }
-    const double &operator()(int i) const { return arrayData[i]; }
+  // ----------------------------------------------------------------
+  // Your operator()() goes here!
+
+
+  // ----------------------------------------------------------------
 
   int numRows() const { return arrayData.size(); }
 
@@ -35,8 +37,5 @@ Vector operator+(const Vector& x, const Vector& y);
 Vector operator-(const Vector& x, const Vector& y);
 void zeroize(Vector& v);
 void randomize(Vector& v);
-void matvec_inner(const Matrix& A, const Vector& x, Vector& y);
-void matvec_outer(const Matrix& A, const Vector& x, Vector& y);
-void matvec_student(const Matrix& A, const Vector& x, Vector& y);
 
 #endif // VECTOR_HPP

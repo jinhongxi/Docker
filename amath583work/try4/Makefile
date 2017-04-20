@@ -1,0 +1,25 @@
+CXX	= c++
+CXXFLAGS	= -Wall -g -std=c++11
+CXXOPTM	= -Wall -O3 -std=c++11
+
+fail: fail.cpp
+	@$(CXX) $(CXXFLAGS) fail.cpp -o fail
+
+success: fail.cpp
+	@$(CXX) $(CXXFLAGS) -DNDEBUG  fail.cpp -o success
+
+timing1: timing.cpp
+	@$(CXX) $(CXXFLAGS) timing.cpp -o timing1
+
+timing2: timing.cpp
+	@$(CXX) $(CXXOPTM) timing.cpp -o timing2
+
+performance1: performance.cpp
+	@$(CXX) $(CXXFLAGS) performance.cpp -o performance1
+
+performance2: performance.cpp
+	@$(CXX) $(CXXOPTM)  performance.cpp -o performance2
+
+clean:
+	@/bin/rm -f fail success timing1 timing2 performance1 performance2
+	@$ clear

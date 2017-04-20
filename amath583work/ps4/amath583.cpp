@@ -11,21 +11,26 @@
 #include "Matrix.hpp"
 
 Vector operator* (const Matrix& A, const Vector& x) {
-  // ----------------------------------------------------------------
-  // Your implementation goes here
-  // It should allocate a vector, zero it out, call matvec(),
-  //   and return the result
-
-  // ----------------------------------------------------------------
+    Vector y(A.numRows());
+    zeroize(y);
+    for (int i = 0; i < A.numRows(); ++i)
+    {
+        for (int j = 0; j < x.numRows(); ++j)
+        {
+            y(i) += A(i, j) * x(j);
+        }
+    }
+    return y;
 }
 
 
 void matvec(const Matrix& A, const Vector& x, Vector& y) {
-  // ----------------------------------------------------------------
-  // Your implementation goes here
-  // It should fill in y with result of A*x
-
-  // ----------------------------------------------------------------
-
-
+    zeroize(y);
+    for (int i = 0; i < A.numRows(); ++i)
+    {
+        for (int j = 0; j < x.numRows(); ++j)
+        {
+            y(i) += A(i, j) * x(j);
+        }
+    }
 }

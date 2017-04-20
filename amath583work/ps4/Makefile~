@@ -1,6 +1,6 @@
 
-bench: bench.o Matrix.o Vector.o
-	c++ -O3 -std=c++11 -Wc++11-extensions bench.o Matrix.o Vector.o -o bench
+bench: bench.o Matrix.o
+	c++ -O3 -std=c++11 -Wc++11-extensions bench.o Matrix.o -o bench
 
 bench.o: bench.cpp Matrix.hpp
 	c++ -O3 -std=c++11 -Wc++11-extensions -c bench.cpp -o bench.o
