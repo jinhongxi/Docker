@@ -78,3 +78,65 @@ void randomize(Vector& v) {
     v(i) = dice();
   }
 }
+
+
+void matvec_inner(const Matrix& A, const Vector& x, Vector& y) {
+    for (int j = 0; j < x.numRows(); ++j)
+    {
+        for (int i = 0; i < A.numRows(); ++i) y(i) += A(i, j) * x(j);
+    }
+}
+
+
+void matvec_outer(const Matrix& A, const Vector& x, Vector& y) {
+    for (int i = 0; i < A.numRows(); ++i)
+    {
+        for (int j = 0; j < x.numRows(); ++j) y(i) += A(i, j) * x(j);
+    }
+}
+
+
+void matvec_student(const Matrix& A, const Vector& x, Vector& y) {
+    /*vector<double> xTemp(x.numRows());
+    
+    for (int j = 0; j < xTemp.size(); ++j) xTemp[j] = x(j);
+    
+    for (int i = 0; i < A.numRows(); ++i)
+    {
+        for (int j = 0; j < xTemp.size(); ++j) y(i) += A(i, j) * xTemp[j];
+    }
+    
+    xTemp.clear();*/
+    vector<double> xTemp;
+    
+    for (int j = 0; j < xTemp.size(); ++j) xTemp.push_back(x(j));
+    
+    for (int i = 0; i < A.numRows(); ++i)
+    {
+        for (int j = 0; j < xTemp.size(); ++j) y(i) += A(i, j) * xTemp[j];
+    }
+    
+    xTemp.clear();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

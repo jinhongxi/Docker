@@ -33,32 +33,13 @@ int main()
     cout << " ].T" << endl;
     
     Vector y(2);
-    zeroize(y);
-    matvec_inner(A, x, y);
+    y = A * x;
     cout << "y = [";
     for (int i = 0; i < y.numRows(); ++i)
     {
         cout << " " << y(i);
     }
-    cout << " ] (inner)" << endl;
-    
-    zeroize(y);
-    matvec_outer(A, x, y);
-    cout << "y = [";
-    for (int i = 0; i < y.numRows(); ++i)
-    {
-        cout << " " << y(i);
-    }
-    cout << " ] (outer)" << endl;
-    
-    zeroize(y);
-    matvec_student(A, x, y);
-    cout << "y = [";
-    for (int i = 0; i < y.numRows(); ++i)
-    {
-        cout << " " << y(i);
-    }
-    cout << " ] (student)" << endl;
+    cout << " ]" << endl;
     
     return 0;
 }

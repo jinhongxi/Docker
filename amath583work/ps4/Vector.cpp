@@ -81,41 +81,62 @@ void randomize(Vector& v) {
 
 
 void matvec_inner(const Matrix& A, const Vector& x, Vector& y) {
-    zeroize(y);
+    assert(A.numCols() == x.numRows());
+    
     for (int j = 0; j < x.numRows(); ++j)
     {
-        for (int i = 0; i < A.numRows(); ++i)
-        {
-            y(i) += A(i, j) * x(j);
-        }
+        for (int i = 0; i < A.numRows(); ++i) y(i) += A(i, j) * x(j);
     }
 }
 
 
 void matvec_outer(const Matrix& A, const Vector& x, Vector& y) {
-    zeroize(y);
+    assert(A.numCols() == x.numRows());
+    
     for (int i = 0; i < A.numRows(); ++i)
     {
-        for (int j = 0; j < x.numRows(); ++j)
-        {
-            y(i) += A(i, j) * x(j);
-        }
+        for (int j = 0; j < x.numRows(); ++j) y(i) += A(i, j) * x(j);
     }
 }
 
 
 void matvec_student(const Matrix& A, const Vector& x, Vector& y) {
-    zeroize(y);
-    vector<double> buffer = {0.0, 0.0, 0.0};
-    for (int i = 1; i < A.numRows(); i += 3)
+    assert(A.numCols() == x.numRows());
+    
+    const int sizes[2] = {x.numRows(), A.numRows()};
+    vector<double> xTemp(sizes[0]);
+    double yTemp = 0.0;
+    
+    for (int j = 0; j < sizes[0]; ++j) xTemp[j] = x(j);
+    
+    for (int i = 0; i < sizes[1]; ++i)
     {
-        for (int j = 1; j < x.numRows(); j += 3)
-        {
-            if (j + 1 != x.numRows()) buffer = {x(j-1), x(j), x(j+1)};
-            else buffer = {x(j-1), x(j), 0.0};
-            y(i) += A(i, j - 1) * buffer[0] + A(i, j) * buffer[1] + A(i, j + 1) * buffer[2];
-            y(i - 1) += A(i - 1, j - 1) * buffer[0] + A(i - 1, j) * buffer[1] + A(i - 1, j + 1) * buffer[2];
-            if (i + 1 != A.numRows()) y(i + 1) += A(i + 1, j - 1) * buffer[0] + A(i + 1, j) * buffer[1] + A(i + 1, j + 1) * buffer[2];
-        }
+        for (int j = 0; j < sizes[0]; ++j) yTemp += A(i, j) * xTemp[j];
+        y(i) = yTemp;
+        yTemp = 0.0;
     }
+    
+    xTemp.clear();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

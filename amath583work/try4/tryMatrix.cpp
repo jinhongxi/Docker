@@ -7,9 +7,9 @@ int main()
 {
     Matrix A(3,3);
     randomizeMatrix(A);
-    for (int i = 0; i < A.numRows(); ++i)
+    for (int i = 0; i < 3; ++i)
     {
-        for (int j = 0; j < A.numCols(); ++j)
+        for (int j = 0; j < 3; ++j)
         {
             cout << " " << A(i,j);
         }

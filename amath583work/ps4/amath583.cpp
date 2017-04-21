@@ -9,10 +9,9 @@
 // 
 #include "Vector.hpp"
 #include "Matrix.hpp"
+#include <cassert>
 
-Vector operator* (const Matrix& A, const Vector& x) {
-    Vector y(A.numRows());
-    zeroize(y);
+void matvec(const Matrix& A, const Vector& x, Vector& y) {
     for (int i = 0; i < A.numRows(); ++i)
     {
         for (int j = 0; j < x.numRows(); ++j)
@@ -20,17 +19,16 @@ Vector operator* (const Matrix& A, const Vector& x) {
             y(i) += A(i, j) * x(j);
         }
     }
-    return y;
 }
 
 
-void matvec(const Matrix& A, const Vector& x, Vector& y) {
+Vector operator* (const Matrix& A, const Vector& x) {
+    assert(A.numCols() == x.numRows());
+    
+    Vector y(A.numRows());
     zeroize(y);
-    for (int i = 0; i < A.numRows(); ++i)
-    {
-        for (int j = 0; j < x.numRows(); ++j)
-        {
-            y(i) += A(i, j) * x(j);
-        }
-    }
+    
+    matvec(A, x, y);
+    
+    return y;
 }
