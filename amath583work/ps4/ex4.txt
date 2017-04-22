@@ -31,10 +31,6 @@ For 'mat*vec' operation, the max achieved floating point rate:
    - FLOPS = 9.47855E+12
    - function = matvec_student
    - N = 64
-For 'mat*mat' operation, the max achieved floating point rate:
-    - FLOPS =
-    - function =
-    - N = 
 
 5. Under what circumstances, if any, is your matvec_student faster than matvec_inner and matvec_outer:
 With N >= 16, the 'matvec_student' funs faster than 'matvec_outer' (boch of which are much faster than 'matvec_inner', thus, the inner one will not be referred here-and-after) with a higher FLOPS.  However,
