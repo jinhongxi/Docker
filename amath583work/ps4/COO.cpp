@@ -14,7 +14,8 @@
 Vector operator*(const COOMatrix& A, const Vector& x) {
   assert(A.numCols() == x.numRows());
 
-  Vector y(A.numRows(), 0.0);
+  Vector y(A.numRows());
+  zeroize(y);
   matvec(A, x, y);
 
   return y;
