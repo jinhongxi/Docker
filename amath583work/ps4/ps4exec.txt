@@ -1,0 +1,17 @@
+1. Vectorization of compiler optimizations:
+   -g: no vecctorization
+   -O3: 4-wise FMA vectorization
+   -Ofast: 4-wist FMA vectorization
+
+
+2. Comparison between different compiler optimizations:
+   Optimization, Time, FLOPS,   FLOPS/FLOPS(-g)
+   -g		 48    1.43E09	1
+   -O3	         6     1.15E10	8
+   -Ofast	 6     1.15E10	8
+   -mavx	 49    1.40E09	.98
+   -mavx2	 51    1.35E09	.94
+   -mxsave	 58    1.18E09	.83
+   -fslp	 52    1.32E09	.92
+   -mfma	 52    1.32E09	.92
+   -mavx512__    (not supported)

@@ -1,0 +1,11 @@
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+  cout << "Routine Clock CPUID Loop-ops Scalar 2-wide 4-wide 4-wide-fma Achieved" << endl;
+  cout << "hoisted 3.5E9  AVX2       12  2.3E9  4.6E9  9.2E9     18.4E9    7.1E9" << endl;
+
+  return 0;
+}

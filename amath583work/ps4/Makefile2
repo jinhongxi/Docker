@@ -1,0 +1,97 @@
+CXX	= c++
+CXXG	= -Wall -g -std=c++11 -Wc++11-extensions
+CXXO3	= -Wall -O3 -std=c++11 -Wc++11-extensions
+CXXFLAGS 	= -Ofast -march=native -DNDEBUG -std=c++11 -Wc++11-extensions -Wall
+
+fail: fail.cpp
+	@$(CXX) $(CXXG) fail.cpp -o fail
+	@$(CXX) $(CXXG) -DNDEBUG  fail.cpp -o success
+
+timing: timing.cpp
+	@$(CXX) $(CXXG) timing.cpp -o timing1
+	@$(CXX) $(CXXO3) timing.cpp -o timing2
+
+performance: performance.cpp
+	@$(CXX) $(CXXG) performance.cpp -o performance1
+	@$(CXX) $(CXXO3)  performance.cpp -o performance2
+
+daltMatrix.o: Matrix.cpp Matrix.hpp
+	@$(CXX) $(CXXG) -DALTMATRIX -c Matrix.cpp -o daltMatrix.o
+
+tryMatrix.o: tryMatrix.cpp
+	@$(CXX) $(CXXG) -c tryMatrix.cpp -o tryMatrix.o
+
+tryVector.o: tryVector.cpp Matrix.hpp Vector.hpp
+	@$(CXX) $(CXXO3) -c tryVector.cpp -o tryVector.o
+
+amath583.o: amath583.cpp Matrix.hpp Vector.hpp
+	@$(CXX) -O3 -std=c++11 -Wc++11-extensions -c amath583.cpp -o amath583.o
+
+daltMatrix: daltMatrix.o tryMatrix.o
+	@$(CXX) $(CXXG) daltMatrix.o tryMatrix.o -o daltMatrix
+
+tryMatrix: Matrix.o tryMatrix.o
+	@$(CXX) $(CXXO3) Matrix.o tryMatrix.o -o tryMatrix
+
+try583: try583.cpp amath583.o Matrix.o Vector.o
+	@$(CXX) $(CXXO3) try583.cpp amath583.o Matrix.o Vector.o -o try583
+
+tryVector: tryVector.o Matrix.o Vector.o
+	@$(CXX) $(CXXO3) Vector.o Matrix.o tryVector.o -o tryVector
+
+ps4bex1: ps4bex1.cpp Matrix.o
+	@$(CXX) $(CXXFLAGS) ps4bex1.cpp Matrix.o -o ps4bex1
+
+ps4bex2: ps4bex2.cpp Matrix.o Vector.o COO.o
+	@$(CXX) $(CXXFLAGS) ps4bex2.cpp Matrix.o Vector.o COO.o -o ps4bex2
+
+ps4exec: sparsebench.cpp COO.o Vector.o
+	@$(CXX) $(CXXG) -DNDEBUG sparsebench.cpp COO.o Vector.o -o sparsebenchG
+	@$(CXX) $(CXXO3) -DNDEBUG sparsebench.cpp COO.o Vector.o -o sparsebenchO3
+
+ps4exec2: sparsebench.cpp COO.o Vector.o
+	@$(CXX) $(CXXG) -DNDEBUG -mavx sparsebench.cpp COO.o Vector.o -o sparsebench1
+	@$(CXX) $(CXXG) -DNDEBUG -mavx2 sparsebench.cpp COO.o Vector.o -o sparsebench2
+	@$(CXX) $(CXXG) -DNDEBUG -mxsave sparsebench.cpp COO.o Vector.o -o sparsebench3
+	@$(CXX) $(CXXG) -DNDEBUG -fslp-vectorize-aggressive sparsebench.cpp COO.o Vector.o -o sparsebench4
+	@$(CXX) $(CXXG) -DNDEBUG -mfma sparsebench.cpp COO.o Vector.o -o sparsebench5
+	@$(CXX) $(CXXG) -DNDEBUG -mavx512cd sparsebench.cpp COO.o Vector.o -o sparsebench6
+	@$(CXX) $(CXXG) -DNDEBUG -mavx512dq sparsebench.cpp COO.o Vector.o -o sparsebench7
+	@$(CXX) $(CXXG) -DNDEBUG -mavx512er sparsebench.cpp COO.o Vector.o -o sparsebench8
+	@$(CXX) $(CXXG) -DNDEBUG -mavx512f sparsebench.cpp COO.o Vector.o -o sparsebench9
+	@$(CXX) $(CXXG) -DNDEBUG -mavx512pf sparsebench.cpp COO.o Vector.o -o sparsebench10
+	@$(CXX) $(CXXG) -DNDEBUG -mavx512vl sparsebench.cpp COO.o Vector.o -o sparsebench11
+
+bench: bench.o Matrix.o Vector.o
+	$(CXX) $(CXXFLAGS) bench.o Matrix.o Vector.o -o bench
+
+sparsebench: sparsebench.o COO.o Vector.o
+	$(CXX) $(CXXFLAGS) sparsebench.o COO.o Vector.o -o sparsebench
+
+bench.o: bench.cpp Matrix.hpp Vector.hpp
+	$(CXX) $(CXXFLAGS) -c bench.cpp -o bench.o
+
+sparsebench.o: sparsebench.cpp COO.hpp
+	$(CXX) $(CXXFLAGS) -c sparsebench.cpp -o sparsebench.o
+
+COO.o: COO.cpp COO.hpp
+	$(CXX) $(CXXFLAGS) -Wall -c COO.cpp -o COO.o
+
+Matrix.o: Matrix.cpp Matrix.hpp
+	$(CXX) $(CXXFLAGS) -Wall -c Matrix.cpp -o Matrix.o
+
+Vector.o: Vector.cpp Vector.hpp
+	$(CXX) $(CXXFLAGS) -Wall -c Vector.cpp -o Vector.o
+
+clean:
+	/bin/rm -f bench bench.o Matrix.o Vector.o sparsebench sparsebench.o COO.o
+	@/bin/rm -f fail success timing1 timing2 performance1 performance2 
+	@/bin/rm -f daltMatrix.o tryMatrix.o tryVector.o amath583.o
+	@/bin/rm -f daltMatrix tryMatrix tryVector try583
+	@/bin/rm -f ps4bex1 ps4bex2 sparsebenchG sparsebenchO3 sparsebench1 sparsebench2 sparsebench3 sparsebench4 sparsebench5 sparsebench6 sparsebench7 sparsebench8 sparsebench9 sparsebench10 sparsebench11
+
+package: amath583.cpp bench.cpp COO.cpp COO.hpp ex4.txt Makefile Matrix.cpp Matrix.hpp ps4bex1.cpp ps4bex2.cpp ps4ex3.txt ps4exec.txt sparsebench.cpp Timer.hpp Vector.cpp Vector.hpp
+	@$ tar -czf ps4.tgz amath583.cpp bench.cpp COO.cpp COO.hpp ex4.txt Makefile Matrix.cpp Matrix.hpp ps4bex1.cpp ps4bex2.cpp ps4ex3.txt ps4exec.txt sparsebench.cpp Timer.hpp Vector.cpp Vector.hpp
+
+tests583:
+	python test_ps4.py True
