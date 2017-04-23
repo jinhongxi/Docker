@@ -1,0 +1,58 @@
+***********************************************************
+JINs-MacBook-Pro:~ Gin$ docker run amath583/cpuinfo
+This CPU supports CPUID_EAX_P4_HT
+This CPU supports CPUID_EAX_PD
+This CPU supports CPUID_EAX_CORE2_DUO_8K
+This CPU supports CPUID_EAX_IVYBRIDGE
+This CPU supports CPUID_EBX_AVX2
+This CPU supports CPUID_ECX_SSE3
+This CPU supports CPUID_ECX_SSSE3
+This CPU supports CPUID_ECX_FMA
+This CPU supports CPUID_ECX_SSE41
+This CPU supports CPUID_ECX_SSE42
+This CPU supports CPUID_ECX_AES
+This CPU supports CPUID_ECX_XSAVE
+This CPU supports CPUID_ECX_AVX
+This CPU supports CPUID_ECX_F16C
+This CPU supports CPUID_ECX_HYPERVISOR
+This CPU supports CPUID_EDX_SSE2
+This CPU supports CPUID_EDX_INTEL64
+This CPU supports CPUID_EDX_XD
+Basefreq : 0 MHz Maxfreq : 0 MHz Busfreq : 0 MHz
+
+Note: SSE = 128-bits
+      AVX / AVX2 = 256-bits
+      AVX512 = 512-bits
+
+=> Max operand size supported (by Mac @ Dorm): AVX2 = 256-bits
+***********************************************************
+1. Description of what changes you made to the timing code:
+(1) Code added:
+	double d = 0.0; \\ to compare with c
+	T.start();
+	for (long i = 0; i < N*N*N; ++i) d += a * b; \\ same operation with c
+	T.stop();
+	cout << "Output d = " << d << " (" << T.elapsed() << " ms)" << endl;
+(2) Output:
+	$ ./performance1
+	No output (2715 ms)
+    	Output d = 1.0592e+10 (2715 ms)
+	$ ./performance2
+	No output (0 ms)
+	Output d = 1.0592e+10 (908 ms)
+
+2. Explanation of why you made those changes:
+(1) add d: to compare with operation with c
+(2) print d: to avoid the -O3 optimization from skipping ‘unnecessary’ steps
+
+3. Clock rate of your computer:
+(1) CPU clock rate: max = 3.1 GHz, min = 1.3 GHz
+(2) GPU clock rate: 500 MHz
+* data obtained from Intel Power Gadget when running ‘$./bench mult’
+
+4. Max achieved floating point rate of your timed code:
+(1) mat-vet operation: 1.53e+13 FLOPS (with ‘multMVstudent’, N = 4096)
+(2) mat-mat operation: 8.70 GFLOPS (with ‘copyblockhoisted’, N = 32)
+
+5. Under what circumstances, if any, is your matvec_student faster than matvec_inner and matvec_outer:
+For N >= 16, the ‘matvec_student’ runs faster than ‘matvec_outer’ (both of which are much faster than ‘matvec_inner’)

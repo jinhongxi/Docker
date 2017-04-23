@@ -1,0 +1,44 @@
+1. Description of what changes you made to the timing code:
+To compare and contrast, I added another double value 'd', operated it in the same way with 'c', timed the operation for 'd' and printted its value as well as time elapsed:
+   	   double d = 0.0;
+   	   T.start();
+   	   for (long i = 0; i < N*N*N; ++i) d += a * b;
+   	   T.stop();
+   	   cout << "Output d = " << d << " (" << T.elapsed() << " ms)" << endl;
+The outputs running 'performance1' without optimization and 'performance2' with optimization are as shown below:
+    	    $ ./performance1
+    	    No output (2715 ms)
+    	    Output d = 1.0592e+10 (2715 ms)
+    	    $ ./performance2
+    	    No output (0 ms)
+    	    Output d = 1.0592e+10 (908 ms)
+where the variable 'd' is operated in the same way with 'c', aka d+=a*b.
+According to what's displayed:
+  (1) without optimization, the times used for printing and not printing the outcomes are identical, which is around 2 sec for the computer in testing;
+  (2) with optimization, the time used for printing the outcome is around 0.9 sec, while the time used for not printing the outcome is 0, however the times are expected to be the same.
+
+2. Explanation of why you made those changes:
+The initial reason to print the outcome of the variable was to study whether its value was 0 when the time elapsed was 0.  By printing the outcome, I figured that the time elapsed jumped to 0.9 sec (which is meaningful compared with 0 sec) and the outcome printted was right.  Thus, I added another variable 'd' and displayed the outcome of 'd' while remaining operations on 'c' unchanged as provided in the homework set.  This gives the difference between displaying and not-displaying the outcomes and explaines in some way why the time jumps to 0.
+
+3. Clock rate of your computer:
+When running the timing program as provided in section 2.2, the time used was about 2157 ms for 1073741824 loops.  Thus, the time used per loop is about
+     cycle time = 2157 ms / 1073741824 loops = 2 ns.
+Thus, the clock rate is about
+     clock rate = 1 / cycle time = 500 MHz
+
+4. Max achieved floating point rate of your timed code:
+For 'mat*vec' operation, the max achieved floating point rate:
+   - FLOPS = 9.47855E+12
+   - function = matvec_student
+   - N = 64
+For 'mat*mat' operation, the max achieved floating point rate:
+    - FLOPS = 5.27995E+09
+    - function = blockhoisted
+    - N = 32
+Thus, the max floating point rate achived is 9.48E+12 FLOPS.
+
+5. Under what circumstances, if any, is your matvec_student faster than matvec_inner and matvec_outer:
+With N >= 16, the 'matvec_student' funs faster than 'matvec_outer' (boch of which are much faster than 'matvec_inner', thus, the inner one will not be referred here-and-after) with a higher FLOPS.  However,
+     (1) as N increases until 512, the difference in computing time tends to decrease; when 1024 <= N <= 2048, the computing time used are the same; after N >= 4096, the difference increases again, and
+     (2) the FLOPS are the same with N = 1024 and 2048, and increases otherwise.
+Thus, we may conclude that for this specific 'matvec_student' function, considering computing time, the student version is faster for 16 <= N <= 512 and N >= 4096.

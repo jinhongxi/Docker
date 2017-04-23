@@ -1,0 +1,5 @@
+1. Which mat-mat product is appropriate for sparse mat-vec product:
+Products '2x4', '4x4' and 'copyblockhoisted4x4' are appropriate for sparse mat-vet product, among which the '2x4' product is considered as the most appropriate one, because the amount of 2D-to-1D multiplications involved is the largest among all product operations.  Thus, the impact of sparse mat-vec product can be maximized with '2x4' product.  
+
+2. Which vectorization operation might help to improve performance and how much:
+4-wise FMA with AVX2 might help to improve performance by 8 times of the flops without vectorization.  While the 4-wise vectorization might help to improve by 4 times and 2-wise vectorization by 2 times.
