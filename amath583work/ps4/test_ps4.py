@@ -169,9 +169,10 @@ int main()
     print("done")
 
     compile('amath583.cpp')
+    compile('Vector.cpp')
     compile('Matrix.cpp')
     compile('vector_driver.cpp')
-    link(['amath583.o','Matrix.o','vector_driver.o'],'vector_driver')
+    link(['amath583.o','Vector.o','Matrix.o','vector_driver.o'],'vector_driver')
     runWithArguments("vector_driver", "")
 
 def test3p3():
@@ -180,9 +181,10 @@ def test3p3():
     print("****************************\n")
 
     compile('amath583.cpp','-O3')
+    compile('Vector.cpp','-O3')
     compile('Matrix.cpp','-O3')
     compile('bench.cpp','-O3')
-    link(['amath583.o','Matrix.o','bench.o'],'bench')
+    link(['amath583.o','Vector.o','Matrix.o','bench.o'],'bench')
     runWithArguments("bench","multMVinner 16")
     runWithArguments("bench","multMVouter 16")
     runWithArguments("bench","multMVstudent 16")
@@ -275,10 +277,11 @@ int main()
         sys.exit()
     print("done")
 
+    compile('Vector.cpp')
     compile('amath583.cpp')
     compile('COO.cpp',cflags="-std=c++11")
     compile('COO_driver.cpp')
-    link(['amath583.o','COO.o','COO_driver.o'],'COO_driver')
+    link(['Vector.o','amath583.o','COO.o','COO_driver.o'],'COO_driver')
     runWithArguments("COO_driver", "")
 
 

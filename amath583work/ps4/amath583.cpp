@@ -7,7 +7,7 @@
 //
 // Author: Andrew Lumsdaine
 // 
-#include "Vector.cpp"
+#include "Vector.hpp"
 #include "Matrix.hpp"
 #include <cassert>
 
