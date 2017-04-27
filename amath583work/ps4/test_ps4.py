@@ -215,9 +215,10 @@ def test3p5():
     print("*** TESTING Exercise 3.5 ***")
     print("****************************\n")
 
-    compile('Matrix.cpp','-Ofast -march=native -DNDEBUG')
+    compile('Vector.cpp','-Ofast -march=native -DNDEBUG')
+    compile('COO.cpp','-Ofast -march=native -DNDEBUG')
     compile('ps4bex2.cpp','-Ofast -march=native -DNDEBUG')
-    link(['Matrix.o','ps4bex2.o'],'ps4bex2')
+    link(['Vector.o','COO.o','ps4bex2.o'],'ps4bex2')
     runWithArguments("ps4bex2","| tee output.txt")
 
     f = open('output.txt')

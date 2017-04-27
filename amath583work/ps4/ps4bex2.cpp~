@@ -1,8 +1,8 @@
 #include <iostream>
 #include <functional>
 #include <cmath>
-#include "Vector.hpp"
-#include "COO.hpp"
+#include "Vector.cpp"
+#include "COO.cpp"
 #include "Timer.hpp"
 
 using namespace std;

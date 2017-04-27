@@ -1,9 +1,10 @@
 #include <iostream>
 #include <functional>
 #include <cmath>
-#include "Vector.cpp"
-#include "COO.cpp"
+#include "Vector.hpp"
+#include "COO.hpp"
 #include "Timer.hpp"
+#include "Matrix.hpp"
 
 using namespace std;
 

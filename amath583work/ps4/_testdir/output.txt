@@ -1,3 +1,5 @@
 Routine Clock CPUID Loop-ops Scalar 2-wide 4-wide 4-wide-fma Achieved
-hoisted 3.1e+09 AVX2 12 2.06667e+09 4.13333e+09 8.26667e+09 1.65333e+10 4.3355e+09
-coo 3.1e+09 AVX2 7 8.85714e+08 1.77143e+09 3.54286e+09 7.08571e+09 1.37439e+10
+hoisted 3.1e+09 AVX2 12 2.06667e+09 4.13333e+09 8.26667e+09 1.65333e+10 4.65551e+09
+hoisted 3.1e+09 AVX2 20 1.24e+09 2.48e+09 4.96e+09 9.92e+09 4.65551e+09
+copyblockhoisted 3.1e+09 AVX2 12 2.06667e+09 4.13333e+09 8.26667e+09 1.65333e+10 9.51793e+09
+copyblockhoisted 3.1e+09 AVX2 20 1.24e+09 2.48e+09 4.96e+09 9.92e+09 9.51793e+09
