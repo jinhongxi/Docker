@@ -93,7 +93,7 @@ Vector operator*(const COOMatrix& A, const Vector& x);
 void matvec(const COOMatrix& A, const Vector& x, Vector& y);
 void piscetize(COOMatrix& A, int xpoints, int ypoints);
 void writeMatrix(const COOMatrix& A, const std::string& filename);
-void streamMatrix(const COOMatrix&A);
-void streamMatrix(const COOMatrix&A, std::ostream& outputFile);
+void streamMatrix(const COOMatrix& A);
+void streamMatrix(const COOMatrix& A, std::ostream& outputFile);
 
 #endif // COO_HPP
