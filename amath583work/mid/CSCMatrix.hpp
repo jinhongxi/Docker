@@ -11,18 +11,37 @@
 
 class CSCMatrix {
 public:
-    CSCMatrix(int M, int N): iRows(M), jCols(N) {}
+    // BEGIN CHANGE
+    CSCMatrix(int M, int N): iRows(M), jCols(N), colIndices(jCols + 1, 0) {}
     
     void openForPushBack() { is_open = true; }
-    void closeForPushBack() { is_open = false; }
+    void closeForPushBack() {
+        is_open = false;
+        std::vector<int> rowCpy = rowIndices;
+        for (int i = 0; i < jCols; ++i) colIndices[i + 1] += colIndices[i];
+        for (int i = jCols; i > 0; --i)
+        {
+            colIndices[i] = colIndices[i - 1];
+        }
+        colIndices[0] = 0;
+    }
     void push_back(int i, int j, double val){
         assert(i < iRows && i >= 0);
         assert(j < jCols && j >= 0);
+        assert(is_open);
         
-        rowIndices.push_back(i);
-        colIndices.push_back(j);
-        arrayData.push_back(val);
+        std::vector<int>::iterator pt1 = rowIndices.begin();
+        std::vector<double>::iterator pt2 = arrayData.begin();
+        for (int r = 0; r < j; ++r)
+        {
+            pt1 += colIndices[r];
+            pt2 += colIndices[r];
+        }
+        rowIndices.insert(pt1, i);
+        arrayData.insert(pt2, val);
+        ++colIndices[j];
     }
+    // END CHANGE
     
     void clear() {
         rowIndices.clear();
@@ -42,9 +61,12 @@ public:
     int numCols() const { return jCols; }
     int numNonzeros() const { return arrayData.size(); }
     
+    //BEGIN CHANGE
     void matvec(const Vector& x, Vector& y) const {
-        for (int k = 0; k < arrayData.size(); ++k) {
-            y(rowIndices[k]) += arrayData[k] * x(colIndices[k]);
+        for (int j = 0; j < jCols; ++j) {
+            for (int i = colIndices[j]; i < colIndices[j + 1]; ++i) {
+                y(rowIndices[i]) += arrayData[i] * x(j);
+            }
         }
     }
     
@@ -54,16 +76,19 @@ public:
         outputFile << iRows << " " << jCols << std::endl;
         
         // Write data
-        for (int i = 0; i < arrayData.size(); ++i) {
-            outputFile << rowIndices[i] << " ";
-            outputFile << colIndices[i] << " ";
-            outputFile << arrayData[i] << " ";
-            outputFile << std::endl;
+        for (int j = 0; j < jCols; ++j) {
+            for (int i = colIndices[j]; i < colIndices[j + 1]; ++i) {
+                outputFile << rowIndices[i] << " ";
+                outputFile << j << " ";
+                outputFile << arrayData[i] << " ";
+                outputFile << std::endl;
+            }
         }
         
         // Write tailer
         outputFile << "THIS IS THE END" << std::endl;
     }
+    // END CHANGE
     
 private:
     int iRows, jCols;

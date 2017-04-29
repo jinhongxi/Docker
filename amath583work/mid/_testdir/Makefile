@@ -48,7 +48,14 @@ bench: bench.o amath583.o Vector.o Matrix.o COO.o AOSCOO.o CSCMatrix.o CSRMatrix
 
 clean:
 	@/bin/rm -f Matrix.o Vector.o COO.o AOSCOO.o CSCMatrix.o CSRMatrix.o amath583.o matvec.o aosmatvec.o cscmatvec.o bench.o
-	@/bin/rm -f matvec aosmatvec cscmatvec bench.o
+	@/bin/rm -f matvec aosmatvec cscmatvec midterm.tgz
 
-package: Makefile COO.cpp COO.hpp AOSMatrix.cpp AOSMatrix.hpp CSCMatrix.cpp CSCMatrix.hpp CSRMatrix.cpp CSRMatrix.hpp Matrix.cpp Matrix.hpp Vector.cpp Vector.hpp Timer.hpp amath583.cpp amath583.hpp matvec.cpp aosmatvec.cpp cscmatvec.cpp bench.cpp sampleDenseMatrix.txt sampleSparseMatrix.txt sampleVector.txt midterm.txt
-	@$ tar -czf midterm.tgz Makefile COO.cpp COO.hpp AOSMatrix.cpp AOSMatrix.hpp CSCMatrix.cpp CSCMatrix.hpp CSRMatrix.cpp CSRMatrix.hpp Matrix.cpp Matrix.hpp Vector.cpp Vector.hpp Timer.hpp amath583.cpp amath583.hpp matvec.cpp aosmatvec.cpp cscmatvec.cpp bench.cpp sampleDenseMatrix.txt sampleSparseMatrix.txt sampleVector.txt midterm.txt
+package: Makefile COO.cpp COO.hpp AOSMatrix.cpp AOSMatrix.hpp CSCMatrix.cpp CSCMatrix.hpp CSRMatrix.cpp CSRMatrix.hpp Matrix.cpp Matrix.hpp Vector.cpp Vector.hpp Timer.hpp amath583.cpp amath583.hpp matvec.cpp aosmatvec.cpp cscmatvec.cpp bench.cpp sampleDenseMatrix.txt sampleSparseMatrix.txt sampleVector.txt midterm.txt AOSvsCOO.jpeg
+	@tar -czf midterm.tgz Makefile COO.cpp COO.hpp AOSMatrix.cpp AOSMatrix.hpp CSCMatrix.cpp CSCMatrix.hpp CSRMatrix.cpp CSRMatrix.hpp Matrix.cpp Matrix.hpp Vector.cpp Vector.hpp Timer.hpp amath583.cpp amath583.hpp matvec.cpp aosmatvec.cpp cscmatvec.cpp bench.cpp sampleDenseMatrix.txt sampleSparseMatrix.txt sampleVector.txt midterm.txt AOSvsCOO.jpeg
+
+unpackage:
+	rm -rf _testdir
+	mkdir _testdir
+	cp midterm.tgz ./_testdir
+	cd ./_testdir &&	\
+	tar -xzf midterm.tgz

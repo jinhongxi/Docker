@@ -14,6 +14,7 @@
 #include "COO.hpp"
 #include "AOSMatrix.hpp"
 #include "CSCMatrix.hpp"
+#include "CSRMatrix.hpp"
 
 Vector readVector(std::istream &inputStream);
 Vector readVector(std::string inputFilename);

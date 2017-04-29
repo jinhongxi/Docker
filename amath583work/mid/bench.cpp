@@ -17,6 +17,7 @@ void runBenchmark_sparse(int num, long maxsize)
         double flops = i * i;
         double t = 0.0;
         
+        // BEGIN CHANGE:
         int xpoints = std::sqrt((double) i);
         assert(xpoints*xpoints == i);
         Vector x(i), y(i);
@@ -77,6 +78,7 @@ void runBenchmark_sparse(int num, long maxsize)
         }
         
         zeroize(y);
+        // END CHANGE
         
         
         cout << i << "\t" << i * i << "\t" << t << "\t" << flops / t << "\t" << t/((double)numruns)  << endl;
@@ -86,6 +88,7 @@ void runBenchmark_sparse(int num, long maxsize)
 
 int main(int argc, char *argv[])
 {
+    // BEGIN CHANGE:
     if (argc != 2)
     {
         cout << "Usage: " << argv[0] << " coo / aos / csc / csr" << endl;
@@ -105,6 +108,7 @@ int main(int argc, char *argv[])
         cout << "Error -2: invalid input" << endl;
         return -2;
     }
+    // END CHANGE
     
     return 0;
 }

@@ -1,8 +1,9 @@
------------------------------
-|Midterm, AMATH 583, SP 2017|
-|Hongxi JIN (1628292)       |
------------------------------
+———————————————————
+|     Midterm, AMATH 583, SP 2017     |
+|     Hongxi JIN (1628292)            |
+———————————————————————————
 
+Performance Evaluation:
 amath583@22d484e26744:~/work/mid$ ./bench csr
 N	N*N	Time	Flops	TperX
 16	256	410	0.62439	2.27971e-05

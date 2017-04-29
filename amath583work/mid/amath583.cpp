@@ -135,7 +135,7 @@ Matrix readMatrix(istream &inputStream)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -196,7 +196,7 @@ Matrix readMatrix(string inputFilename)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -258,7 +258,7 @@ COOMatrix readCOOMatrix(istream &inputStream)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -328,7 +328,7 @@ COOMatrix readCOOMatrix(string inputFilename)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -399,7 +399,7 @@ AOSMatrix readAOSMatrix(istream &inputStream)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -469,7 +469,7 @@ AOSMatrix readAOSMatrix(string inputFilename)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -540,7 +540,7 @@ CSCMatrix readCSCMatrix(istream &inputStream)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -562,6 +562,7 @@ CSCMatrix readCSCMatrix(istream &inputStream)
     }
     
     CSCMatrix mat(rows, cols);
+    mat.openForPushBack();
     
     if (non0 != rows * cols)
     {
@@ -584,6 +585,7 @@ CSCMatrix readCSCMatrix(istream &inputStream)
             }
         }
     }
+    mat.closeForPushBack();
     
     inputStream.ignore();
     inputStream.getline(trailer, 20);
@@ -610,7 +612,7 @@ CSCMatrix readCSCMatrix(string inputFilename)
     
     char header[25], trailer[25];
     inputStream.getline(header, 25);
-    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0)
+    if (strcmp(header, "AMATH 583 DENSE MATRIX") == 0 || strcmp(header, "AMATH 583 MATRIX") == 0)
     {
         inputStream >> rows >> cols;
         non0 = rows * cols;
@@ -632,6 +634,7 @@ CSCMatrix readCSCMatrix(string inputFilename)
     }
     
     CSCMatrix mat(rows, cols);
+    mat.openForPushBack();
     
     if (non0 != rows * cols)
     {
@@ -654,6 +657,7 @@ CSCMatrix readCSCMatrix(string inputFilename)
             }
         }
     }
+    mat.closeForPushBack();
     
     inputStream.ignore();
     inputStream.getline(trailer, 20);
