@@ -8,11 +8,11 @@
 // Author: Andrew Lumsdaine
 //
 
+#include <future>
 #include <iostream>
 #include <mutex>
 #include <string>
 #include <thread>
-#include <future>
 
 typedef unsigned long size_t;
 
@@ -45,16 +45,15 @@ size_t deposit(const std::string& msg, size_t amount) {
   return bank_balance;
 }
 
-
 int main() {
   std::cout << "Starting balance is " << bank_balance << std::endl;
 
   std::future<size_t> bonnie = std::async(withdraw, "Bonnie", 100);
   std::future<size_t> clyde  = std::async(deposit, "Clyde", 100);
-  
+
   std::cout << "Balance after Clyde's deposit is " << clyde.get() << std::endl;
   std::cout << "Balance after Bonnie's withdrawal is " << bonnie.get() << std::endl;
-  
+
   std::cout << "Final bank balance is " << bank_balance << std::endl;
 
   return 0;

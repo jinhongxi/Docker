@@ -12,6 +12,10 @@
 #include <cmath>
 #include <random>
 #include <functional>
+#include <thread>
+#include <future>
+#include <mutex>
+
 #include "Vector.hpp"
 
 using namespace std;
@@ -120,16 +124,56 @@ void matvec_student(const Matrix& A, const Vector& x, Vector& y) {
 }
 
 
-double partitionedTwoNorm(const Vector& x, size_t partitions)
+void ptn_worker(const Vector& x, size_t begin, size_t end, double& partial)
 {
+  mutex x_mutex;
+    double worker = 0.0;
+    for (size_t i = begin; i < end; ++i) 
+    {
+        if (i < x.numRows()) worker += x(i) * x(i);
+    }
+    {
+        lock_guard<mutex> x_guard(x_mutex);
+        partial += worker;
+    }
 }
 
+
+double partitionedTwoNorm(const Vector& x, size_t partitions)
+{
+    double norm = 0.0;
+    
+    vector<thread> threads;
+    for (size_t i = 0; i < partitions; ++i)
+        threads.push_back(thread(ptn_worker, x, i * x.numRows() / partitions, (i+1) * x.numRows() / partitions, ref(norm)));
+    for (size_t i = 0; i < partitions; ++i) threads[i].join();
+    
+    return sqrt(norm);
+}
+
+
+double rtn_worker(const Vector& x, size_t begin, size_t end, size_t level)
+{
+    if (level == 0)
+    {
+        size_t sizeTemp = end - begin;
+        Vector temp(sizeTemp);
+        for (size_t i = 0; i < sizeTemp; ++i) temp(i) = x(i + begin);
+        return twoNorm(temp) * twoNorm(temp);
+    }
+    else return rtn_worker(x, begin, begin + (end-begin)/2, level - 1) + rtn_worker(x, begin + (end-begin)/2, end, level - 1);
+}
 
 double recursiveTwoNorm(const Vector& x, size_t levels)
 {
-}
-
-
-void task_matvec(const Matrix& A, const Vector& x, Vector& y, size_t partitions)
-{
+    double norm = 0.0;
+    vector<future<double> > workers;
+    
+    for (size_t i = 0; i < levels; ++i)
+        workers.push_back(async(launch::async | launch::deferred, rtn_worker, x, i * x.numRows() / levels, (i+1) * x.numRows() / levels, i));
+    
+    for (size_t i = 0; i < levels; ++i)
+        norm += workers[i].get();
+    
+    return sqrt(norm);
 }

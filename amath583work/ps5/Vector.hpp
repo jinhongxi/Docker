@@ -12,7 +12,6 @@
 #define VECTOR_HPP
 
 #include <vector>
-#include <thread>
 #include "Matrix.hpp"
 
 class Vector {
@@ -46,9 +45,10 @@ void matvec_outer(const Matrix& A, const Vector& x, Vector& y);
 void matvec_student(const Matrix& A, const Vector& x, Vector& y);
 
 
+void ptn_worker(const Vector& x, size_t begin, size_t end, double& partial);
 double partitionedTwoNorm(const Vector& x, size_t partitions);
-double recursiveTwoNorm(const Vector& x, size_t levels);
-void task_matvec(const Matrix& A, const Vector& x, Vector& y, size_t partitions);
 
+double rtn_worker(const Vector& x, size_t begin, size_t end, size_t level);
+double recursiveTwoNorm(const Vector& x, size_t levels);
 
 #endif // VECTOR_HPP
