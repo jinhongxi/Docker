@@ -1,0 +1,11 @@
+1. You measured bandwidth explicitly in the bandwidth program and implicitly with the roofline program. How well do the bandwidths from these two profiles match? Include the two generated pdf files (do not rename them) with your other materials for this assignment.
+
+
+2. Calculate the numeric intensity of sparse matrix-vector product with compressed sparse row (CSR) format, for the two cases of index types being integer (32 bit) and unsigned long (64 bit). Use your roofline graph to estimate the performance of CSR sparse matrix vector product on your computer.
+
+
+3. Extra Credit Implement sparse matrix-vector product with CSR format and compare the results you obtain experimentally with what was predicted by your roofline model.
+
+
+4. (AMATH 583 only) In lecture 12 the instructor speculated about the reason for only limited speedup in the dense matrix-vector product example and hypothesized an explanation. What kind of experiment might you conduct to prove (or disprove) that hypothesis?
+

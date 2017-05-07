@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include "Matrix.hpp"
 #include "Vector.hpp"
 #include "Timer.hpp"
 
@@ -8,7 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    size_t N = 1024;
+    size_t N = 1024*1024;
     size_t numThreads = 4;
     
     if (argc < 2)
@@ -17,7 +16,7 @@ int main(int argc, char* argv[])
     }
     
     if (argc < 2 || string(argv[1]) == "0" || stod(argv[1]) <= 0)
-        cout << "Invalid size N, set to default: 1024" << endl;
+        cout << "Invalid size N, set to default: 1024*1024" << endl;
     else N = stod(argv[1]);
     
     if (argc < 3 || string(argv[2]) == "0" || stod(argv[2]) <= 0)
@@ -27,24 +26,19 @@ int main(int argc, char* argv[])
     Vector x(N);
     randomize(x);
     
-    Matrix A(N, N);
-    randomizeMatrix(A);
-    
-    Vector y(N);
-    Vector y0(N);
-    
     Timer T;
     T.start();
-    matvec(A, x, y0);
+    double norm0 = twoNorm(x);
     T.stop();
-    double t0 = T.elapsed();
+    double t0 = 1000*T.elapsed();
     
     T.start();
-    task_matvec(A, x, y, numThreads);
+    double norm2 = partitionedTwoNorm(x, numThreads);
     T.stop();
-    double t = T.elapsed();
+    double t = 1000*T.elapsed();
     
-    cout << N << " " << t0 << " " << t << " " << t0 / t << " " << twoNorm(y)-twoNorm(y0) << endl;
+    zeroize(x);
     
+    cout << N << " " << t0 << " " << t << " " << t0 / t << " " << norm2 - norm0 << endl;
     return 0;
 }

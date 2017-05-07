@@ -4,17 +4,25 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include "Matrix.hpp"
+#include "Vector.hpp"
 
 using namespace std;
 
-double x = 0.0;
-mutex x_mutex;
-
-double partial_x(size_t begin, size_t end, double h)
+double inner_dot(const Matrix& A, const Vector& x, unsigned long i, double init)
 {
-    double partial_x = 0.0;
-    for (size_t i = begin; i < end; ++i) partial_x += 4.0 / (1.0 + i*i*h*h);
-    return partial_x;
+    for (unsigned long j = 0; j < A.numCols(); ++j)
+        init += A(i, j) * x(j);
+    return init;
+}
+
+void task_matvec(const Matrix& A, const Vector& x, const Vector& y)
+{
+    vector<future<double> > futs(A.numRows());
+    for (unsigned long i = 0; i < A.numRows(); ++i)
+        futs[i] = async(inner_dot, A, x, i, 0.0);
+    for (unsigned long i = 0; i < A.numRows(); ++i)
+        y(i) = futs[i].get();
 }
 
 int main(int argc, char* argv[])
