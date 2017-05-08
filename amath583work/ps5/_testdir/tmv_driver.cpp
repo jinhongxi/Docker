@@ -37,12 +37,12 @@ int main(int argc, char* argv[])
     T.start();
     matvec(A, x, y0);
     T.stop();
-    double t0 = 1000*T.elapsed();
+    double t0 = T.elapsed();
     
     T.start();
     task_matvec(A, x, y, numThreads);
     T.stop();
-    double t = 1000*T.elapsed();
+    double t = T.elapsed();
     
     cout << N << " " << t0 << " " << t << " " << t0 / t << " " << twoNorm(y)-twoNorm(y0) << endl;
     

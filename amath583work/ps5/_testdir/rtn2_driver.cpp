@@ -32,12 +32,12 @@ int main(int argc, char* argv[])
     T.start();
     double norm0 = twoNorm(x);
     T.stop();
-    double t0 = 1000*T.elapsed();
+    double t0 = T.elapsed();
     
     T.start();
     double norm2 = recursiveTwoNorm(x, level);
     T.stop();
-    double t = 1000*T.elapsed();
+    double t = T.elapsed();
     
     zeroize(x);
     

@@ -1,0 +1,151 @@
+{
+   "empirical": {
+      "gbytes": {
+         "data": [
+            [
+               "L1", 
+               757.16
+            ], 
+            [
+               "L2", 
+               449.34
+            ], 
+            [
+               "L3", 
+               326.3
+            ], 
+            [
+               "DRAM", 
+               22.16
+            ]
+         ], 
+         "metadata": {
+            "TIMESTAMP_DATA": [
+               1494194494.27, 
+               1494194515.2, 
+               1494194504.82
+            ], 
+            "FLOPS": 1, 
+            "TIMESTAMP_DB": 1494196967.580432
+         }
+      }, 
+      "gflops": {
+         "data": [
+            [
+               "GFLOPs", 
+               253.64
+            ]
+         ], 
+         "metadata": {
+            "TIMESTAMP_DATA": [
+               1494194959.95, 
+               1494194922.22, 
+               1494194940.82
+            ], 
+            "FLOPS": 16, 
+            "TIMESTAMP_DB": 1494196967.580155
+         }
+      }, 
+      "metadata": {
+         "ERT_VERSION": "1.1.0", 
+         "OPENMP_THREADS": 8, 
+         "HOSTNAME": [
+            "c4ba798bf1f2", 
+            [], 
+            [
+               "172.17.0.9"
+            ]
+         ], 
+         "CONFIG": {
+            "ERT_WORKING_SET_MIN": [
+               "1"
+            ], 
+            "ERT_CFLAGS": [
+               "-Ofast", 
+               "-march=native"
+            ], 
+            "ERT_CC": [
+               "cc"
+            ], 
+            "ERT_MPI_CFLAGS": [], 
+            "ERT_MPI_LDFLAGS": [], 
+            "ERT_MEMORY_MAX": [
+               "1073741824", 
+               "#", 
+               "1GB"
+            ], 
+            "ERT_LDFLAGS": [], 
+            "ERT_LDLIBS": [], 
+            "ERT_RUN": [
+               "export", 
+               "OMP_NUM_THREADS=ERT_OPENMP_THREADS", 
+               ";", 
+               "./ERT_CODE"
+            ], 
+            "ERT_FLOPS": [
+               "1,4,16,32,64"
+            ], 
+            "ERT_OPENMP_CFLAGS": [
+               "-fopenmp"
+            ], 
+            "ERT_MPI": [
+               "False"
+            ], 
+            "ERT_TRIALS_MIN": [
+               "1"
+            ], 
+            "ERT_DRIVER": [
+               "driver1"
+            ], 
+            "ERT_RESULTS": [
+               "Results"
+            ], 
+            "ERT_OPENMP": [
+               "True"
+            ], 
+            "ERT_OPENMP_THREADS": [
+               "1,2,4,8", 
+               "#", 
+               ",16"
+            ], 
+            "ERT_KERNEL": [
+               "kernel1"
+            ], 
+            "ERT_GPU": [
+               false
+            ], 
+            "ERT_LD": [
+               "cc"
+            ], 
+            "ERT_NUM_EXPERIMENTS": [
+               "3"
+            ], 
+            "ERT_OPENMP_LDFLAGS": [
+               "-fopenmp"
+            ], 
+            "ERT_ALIGN": [
+               "64"
+            ], 
+            "ERT_GNUPLOT": [
+               "gnuplot"
+            ]
+         }, 
+         "UNAME": [
+            "Linux", 
+            "c4ba798bf1f2", 
+            "4.9.12-moby", 
+            "#1 SMP Tue Feb 28 12:11:36 UTC 2017", 
+            "x86_64", 
+            "x86_64"
+         ]
+      }
+   }, 
+   "spec": {
+      "gbytes": {
+         "data": []
+      }, 
+      "gflops": {
+         "data": []
+      }
+   }
+}

@@ -1,11 +1,31 @@
 1. You measured bandwidth explicitly in the bandwidth program and implicitly with the roofline program. How well do the bandwidths from these two profiles match? Include the two generated pdf files (do not rename them) with your other materials for this assignment.
 
+According to the roofline model, the CPU peak of the operating machine is approximately 253.6 GFLOPs/sec and the measured bandwidth, indicated as the slop of purple lines, tends to be much higher than measured with the bandwidth program.
+
 
 2. Calculate the numeric intensity of sparse matrix-vector product with compressed sparse row (CSR) format, for the two cases of index types being integer (32 bit) and unsigned long (64 bit). Use your roofline graph to estimate the performance of CSR sparse matrix vector product on your computer.
 
+Denote: N = number of elements in each col, NNZ = number of non-zeros in each row;
+FLOPs per iteration = 2;
+Total iteration = N * NNZ;
+Total FLOPs = 2 * N * NNZ;
+Total bytes = (3 * NNZ doubles + 3 * NNZ ints/unsigned longs) * N = 36 * N * NNZ bytes (48 * N * NNZ bytes for unsigned longs)
+Numerical intensity 
+            = 2*N*NNZ / 36*N*NNZ = 1/18 FLOPs/Byte ~ 0.056 (int)
+            = 2*N*NNZ / 48*N*NNZ = 1/24 FLOPs/Byte ~ 0.042 (unsigned long)
+According to the roofline graph, 
+Performance = 1.3 GFLOPs/sec (int)
+            = 1.1 GFLOPs/sec (unsigned long)
 
-3. Extra Credit Implement sparse matrix-vector product with CSR format and compare the results you obtain experimentally with what was predicted by your roofline model.
+
+3. (Extra Credit) Implement sparse matrix-vector product with CSR format and compare the results you obtain experimentally with what was predicted by your roofline model.
+
+The performance running bench with N = 1024 gives
+Experimental performance = 349525 FLOPs/sec ~ 0.35 GFLOPs/sec (int)
+                         = 262144 FLOPs/sec ~ 0.26 GFLOPs/sec (unsigned long)
+both of which are much lower than what it’s expected to be.
 
 
 4. (AMATH 583 only) In lecture 12 the instructor speculated about the reason for only limited speedup in the dense matrix-vector product example and hypothesized an explanation. What kind of experiment might you conduct to prove (or disprove) that hypothesis?
 
+Though multicore operation is performed, acceleration is still limited by the procedure fetching instructions and loading/storing data into and from memory side.  Thus, only limited speedup might be achieved.  To prove this hypothesis, we may write one program timing the speed fetching an instruction or load/store data through the memory side without any other operations, and another one timing the speed for these processes as well as one-or-two FLOPs.  If the ratio of no-operaton over 1-or-2-FLOPs is pretty high, then the hypothesis is proved.
