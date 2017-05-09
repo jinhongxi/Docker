@@ -45,13 +45,13 @@ void matvec_outer(const Matrix& A, const Vector& x, Vector& y);
 void matvec_student(const Matrix& A, const Vector& x, Vector& y);
 
 
-void ptn_worker(const Vector& x, size_t begin, size_t end, double& partial);
-double partitionedTwoNorm(const Vector& x, size_t partitions);
+void ptn_worker(const Vector& x, std::size_t begin, std::size_t end, double& partial);
+double partitionedTwoNorm(const Vector& x, std::size_t partitions);
 
-double rtn_worker(const Vector& x, size_t begin, size_t end, size_t level);
-double recursiveTwoNorm(const Vector& x, size_t levels);
+double rtn_worker(const Vector& x, std::size_t begin, std::size_t end, std::size_t level);
+double recursiveTwoNorm(const Vector& x, std::size_t levels);
 
-void matvec_helper(const Matrix& A, const Vector& x, Vector& y, size_t begin, size_t end);
-void task_matvec(const Matrix& A, const Vector& x, Vector& y, size_t partitions);
+void matvec_helper(const Matrix& A, const Vector& x, Vector& y, std::size_t begin, std::size_t end);
+void task_matvec(const Matrix& A, const Vector& x, Vector& y, std::size_t partitions);
 
 #endif // VECTOR_HPP

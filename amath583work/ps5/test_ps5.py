@@ -99,8 +99,8 @@ int main()
     link(['-pthread','Vector.o','partitionedTwoNorm_driver.o'], 'partitionedTwoNorm_driver')
     runWithArguments("partitionedTwoNorm_driver", "")
 
-    make('ptn2_driver')
-    runWithArguments('ptn2_driver', '100 4')
+    make('pt2n_driver')
+    runWithArguments('pt2n_driver', '100 4')
 
 def test3p2():
     print("\n****************************")
@@ -139,8 +139,8 @@ int main()
     link(['-pthread','Vector.o','recursiveTwoNorm_driver.o'], 'recursiveTwoNorm_driver')
     runWithArguments("recursiveTwoNorm_driver", "")
 
-    make('rtn2_driver')
-    runWithArguments('rtn2_driver', '100 4')
+    make('rt2n_driver')
+    runWithArguments('rt2n_driver', '100 4')
 
 def test3p3():
     print("\n****************************")
@@ -148,6 +148,7 @@ def test3p3():
     print("****************************\n")
 
     make('Vector.o')
+    make('tmv.o')
     make('Matrix.o')
 
     codestring = \
@@ -190,7 +191,7 @@ int main()
     print("done")
 
     compile('task_matvec_driver.cpp')
-    link(['-pthread','Vector.o','task_matvec_driver.o'], 'task_matvec_driver')
+    link(['-pthread','Vector.o','tmv.o','task_matvec_driver.o'], 'task_matvec_driver')
     runWithArguments("task_matvec_driver", "")
 
     make('tmv_driver')
