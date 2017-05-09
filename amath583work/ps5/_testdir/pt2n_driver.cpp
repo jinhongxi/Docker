@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    size_t N = 1024*1024;
+    size_t N = 32L*8192L;
     size_t numThreads = 4;
     
     if (argc < 2)
@@ -16,24 +16,27 @@ int main(int argc, char* argv[])
     }
     
     if (argc < 2 || string(argv[1]) == "0" || stod(argv[1]) <= 0)
-        cout << "Invalid size N, set to default: 1024*1024" << endl;
+        cout << "Invalid size N, set to default: 32L*8192L" << endl;
     else N = stod(argv[1]);
     
     if (argc < 3 || string(argv[2]) == "0" || stod(argv[2]) <= 0)
         cout << "Invalid number of threads, set to default: 4" << endl;
     else numThreads = stod(argv[2]);
     
+    long runs = 4L*1048L*1048L/(N*N) + 2;
     Vector x(N);
     randomize(x);
     
+    double norm0 = 0.0, norm2 = 0.0;
+    
     Timer T;
     T.start();
-    double norm0 = twoNorm(x);
+    for (long i = 0; i < runs; ++i) norm0 = twoNorm(x);
     T.stop();
     double t0 = T.elapsed();
     
     T.start();
-    double norm2 = partitionedTwoNorm(x, numThreads);
+    for (long i = 0; i < runs; ++i) norm2 = partitionedTwoNorm(x, numThreads);
     T.stop();
     double t = T.elapsed();
     
