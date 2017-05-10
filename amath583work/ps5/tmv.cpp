@@ -32,6 +32,10 @@ void task_matvec(const Matrix& A, const Vector& x, Vector& y, size_t partitions)
 {
     vector<thread> threads;
     for (size_t i = 0; i < partitions; ++i)
-        threads.push_back(thread(matvec_helper, A, x, ref(y), i * x.numRows() / partitions, (i+1) * x.numRows() / partitions));
+    {
+        size_t begin = i * A.numRows() / partitions;
+        size_t end = (i+1) * A.numRows() / partitions;
+        threads.push_back(thread(matvec_helper, cref(A), cref(x), ref(y), begin, end));
+    }
     for (size_t i = 0; i < partitions; ++i) threads[i].join();
 }
