@@ -168,7 +168,11 @@ double partitionedTwoNorm(const Vector& x, size_t partitions)
     
     vector<thread> threads;
     for (size_t i = 0; i < partitions; ++i)
-        threads.push_back(thread(ptn_worker, x, i * x.numRows() / partitions, (i+1) * x.numRows() / partitions, ref(norm)));
+    {
+        size_t begin = i * x.numRows() / partitions;
+        size_t end = (i+1) * x.numRows() / partitions;
+        threads.push_back(thread(ptn_worker, cref(x), begin, end, ref(norm)));
+    }
     for (size_t i = 0; i < partitions; ++i) threads[i].join();
     
     return sqrt(norm);
@@ -193,7 +197,11 @@ double recursiveTwoNorm(const Vector& x, size_t levels)
     vector<future<double> > workers;
     
     for (size_t i = 0; i < levels; ++i)
-        workers.push_back(async(launch::async | launch::deferred, rtn_worker, x, i * x.numRows() / levels, (i+1) * x.numRows() / levels, i));
+    {
+        size_t begin = i * x.numRows() / levels;
+        size_t end = (i+1) * x.numRows() / levels;
+        workers.push_back(async(launch::async | launch::deferred, rtn_worker, cref(x), begin, end, i));
+    }
     
     for (size_t i = 0; i < levels; ++i)
         norm += workers[i].get();
