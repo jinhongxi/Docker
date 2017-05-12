@@ -1,0 +1,16 @@
+HOSTNAME=7a9ecbd2a572
+SHELL=/bin/bash
+TERM=xterm
+OLDPWD=/
+IN_HOME=/home/admin
+IN_UID=1003
+AM_HOME=/home/amath583
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/home/amath583/work/ps6
+AM_USER=amath583
+SHLVL=1
+HOME=/home/amath583
+no_proxy=*.local, 169.254/16
+IN_USER=admin
+AM_UID=1002
+_=/usr/bin/env

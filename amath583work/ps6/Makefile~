@@ -1,0 +1,30 @@
+CXX	= c++
+CL	= clang++
+CLFLAGS	= -O3 -march=native -DNDEBUG -std=c++11 -Wc++11-extensions -fopenmp -Wall
+CXXFLAGS 	= -Ofast -march=native -DNDEBUG -std=c++11 -Wc++11-extensions -pthread -Wall
+
+Matrix.o: Matrix.cpp Matrix.hpp
+	@$(CXX) $(CXXFLAGS) -Wall -c Matrix.cpp -o Matrix.o
+
+Vector.o: Vector.cpp Vector.hpp Matrix.hpp
+	@$(CXX) $(CXXFLAGS) -Wall -c Vector.cpp -o Vector.o
+
+COO.o: COO.cpp COO.hpp
+	@$(CXX) $(CXXFLAGS) -Wall -c COO.cpp -o COO.o
+
+CSR.o: CSR.cpp CSR.hpp
+	@$(CXX) $(CXXFLAGS) -Wall -c CSR.cpp -o CSR.o
+
+hello: hello_omp_thread.cpp hello_omp.cpp
+	@$(CL) $(CLFLAGS) hello_omp_thread.cpp -o hello1
+	@$(CL) $(CLFLAGS) hello_omp.cpp -o hello2
+
+clean:
+	@/bin/rm -f Matrix.o Vector.o COO.o CSR.o
+	@/bin/rm -f hello1 hello2 
+
+package: Makefile ex6.txt Matrix.cpp Matrix.hpp Vector.cpp Vector.hpp Timer.hpp COO.cpp COO.hpp CSR.cpp CSR.hpp
+	@tar -czf ps6.tgz Makefile ex6.txt Matrix.cpp Matrix.hpp Vector.cpp Vector.hpp Timer.hpp COO.cpp COO.hpp CSR.cpp CSR.hpp
+
+tests583:
+	python test_ps6.py True
