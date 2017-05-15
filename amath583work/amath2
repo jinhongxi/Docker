@@ -1,0 +1,4 @@
+        docker pull amath583/base
+	docker pull amath583/openmp
+	docker run amath583/openmp
+	docker run -it -v /Users/jinhx/Documents/amath583work:/home/amath583/work amath583/openmp
