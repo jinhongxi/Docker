@@ -21,7 +21,8 @@ int main(int argc, char* argv[]) {
   if (argc >= 2) rounds = std::stol(argv[1]);
 
   int myrank = MPI::COMM_WORLD.Get_rank();
-  int mysize = MPI::COMM_WORLD.Get_size();
+  //int mysize = MPI::COMM_WORLD.Get_size();
+    //std::cout << "Size: " << mysize << std::endl;
 
   while (rounds--) {
     if (0 == myrank) {
