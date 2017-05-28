@@ -3,6 +3,7 @@
 #include <mpi.h>
 #include <cmath>
 #include "Vector.hpp"
+#include "Timer.hpp"
 
 
 double mpiTwoNorm(Vector &x0)
@@ -36,16 +37,30 @@ int main(int argc, char* argv[])
     if (myrank == 0)
     {
         len0 = len * mysize;
-        std::cout << "\tglobal\tmpi\tdiff" << std::endl;
+        std::cout << "process\tsize\tseq_t\tpar_t\tdiff" << std::endl;
     }
     
     Vector x0(len0);
     randomize(x0);
 
+    Timer T;
+    T.start();
     double norm = mpiTwoNorm(x0);
-    double norm0 = twoNorm(x0);
+    T.stop();
     
-    if (myrank == 0) std::cout << mysize << "\t" << norm0 << "\t" << norm << "\t" << std::abs(norm0 - norm) << std::endl;
+    if (myrank == 0)
+    {
+      double t = T.elapsed();
+      
+      Timer T0;
+      T0.start();
+      double norm0 = twoNorm(x0);
+      T0.stop();
+      double t0 = T0.elapsed();
+      std::cout << x0.numRows() << "\t" << norm0 << "\t" << t0 << std::endl;
+      
+      std::cout << mysize << "\t" << len0 << "\t" << t0 << "\t" << t << "\t" << std::abs(norm0 - norm) << std::endl;
+    }
     
     MPI::Finalize();
     
