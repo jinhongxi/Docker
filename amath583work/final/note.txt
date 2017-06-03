@@ -20,11 +20,11 @@ $more mpirun.e###
 
 $more mpirun.o###
 $more mpirun.o*
-      show output
+      show output end with .o<any number>
 
 $/bin/rm -f <file>
 $/bin/rm -f *.o
-	 delete files
+	 delete files end with .o
 
 $rm -rf <directory>
     delete directory

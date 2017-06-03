@@ -87,29 +87,3 @@ ir-mpi.o: /nfs/home/trove/amath583/Stencil.hpp mpiStencil.hpp Final.hpp
 cg-mpi.o: /nfs/home/trove/amath583/Grid.hpp /nfs/home/trove/amath583/cg.hpp
 cg-mpi.o: /nfs/home/trove/amath583/Stencil.hpp mpiStencil.hpp Final.hpp
 
-
-# BEGIN CHANGE:
-
-mpi2norm_timer : mpi2norm_timer.o Vector.o
-		  $(CXX) $(CXXFLAGS) $^ -o $@
-
-mpi2norm_timer.o: /nfs/home/trove/amath583/Timer.hpp
-mpi2norm_timer.o: /nfs/home/trove/amath583/Vector.hpp
-
-thr2norm_timer : mpi2norm_timer.o Vector.o
-		  $(CXX) $(CXXFLAGS) $^ -o $@
-
-thr2norm_timer.o: /nfs/home/trove/amath583/Timer.hpp
-thr2norm_timer.o: /nfs/home/trove/amath583/Vector.hpp
-
-tsk2norm_timer : mpi2norm_timer.o Vector.o
-		  $(CXX) $(CXXFLAGS) $^ -o $@
-
-tsk2norm_timer.o: /nfs/home/trove/amath583/Timer.hpp
-tsk2norm_timer.o: /nfs/home/trove/amath583/Vector.hpp
-
-
-package: ir-mpi.cpp cg-mpi.cpp mpiTwoNormMPI.pdf mpiTwoNormOpenMP.pdf ex1.txt Final.cpp mpiStencil.cpp Makefile
-	tar -czf final.tgz ir-mpi.cpp cg-mpi.cpp mpiTwoNormMPI.pdf mpiTwoNormOpenMP.pdf ex1.txt Final.cpp mpiStencil.cpp Makefile
-
-# END CHANGE:
