@@ -1,0 +1,41 @@
+$ssh -i ~/Documents/jinhx_id_rsa.txt jinhx@
+     34.208.45.5	(1 x 32)
+     34.209.162.111	(8 x 4)
+     34.208.157.36	(32 x 1)
+	** 8 x 4 = 8 nodes, each node has 4 cores
+
+$qsub -V -b y -cwd -pe mpi 8 mpirun hostname
+	show which cores are running
+
+$qsub -pe mpi <#process> -b y -cwd mpirun ./<executable> [command]
+
+$qstat
+	check which job is in process
+
+$qdel <#job>
+	delete the job #
+
+$more mpirun.e###
+      tell if there’s anything wrong
+
+$more mpirun.o###
+$more mpirun.o*
+      show output
+
+$/bin/rm -f <file>
+$/bin/rm -f *.o
+	 delete files
+
+$rm -rf <directory>
+    delete directory
+
+$scp -i ~/Documents/jinhx_id_rsa.txt jinhx@34.209.162.111:/nfs/home/jinhx/<file> ~/Documents/Docker/amath583work/final
+     download files to laptop
+
+$scp -i ~/Documents/jinhx_id_rsa.txt <file> jinhx@34.209.162.111:/nfs/home/jinhx
+	upload files
+
+
+==output===================================
+
+

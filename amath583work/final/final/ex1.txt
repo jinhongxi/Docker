@@ -1,0 +1,69 @@
+1. On the 1x32 cluster: How do you expect the 8 MPI processes to be distributed across the cluster (how many processes per node)?
+
+   1 32-core-node running,
+   8 processes per node,
+   1 process per core
+
+
+2. On the 1x32 cluster: At what vector length did you start seeing speedup? What were the sequential and parallel runtimes for this vector length?
+
+   global size = 16384,
+   seq time = 5.08 ms,
+   mpi time = 4.73 ms
+   speed-up = 1.07
+
+
+3. On the 32x1 cluster: How do you expect the 8 MPI processes to be distributed across the cluster (how many processes per node)?
+
+   8 1-core-nodes running,
+   1 process per node,
+   1 process per core
+
+
+4. On the 32x1 cluster: At what vector length did you start seeing speedup? What were the sequential and parallel runtimes for this vector length?
+
+   global size = 2097152,
+   seq time = 629 ms,
+   mpi time = 557 ms,
+   speed-up = 1.13
+
+
+5. On the 8x4 cluster: How do you expect the 8 MPI processes to be distributed across the cluster (how many processes per node)?
+
+   2 4-core-nodes running,
+   4 processes per node,
+   1 process per core
+
+
+6. On the 8x4 cluster: At what vector length did you start seeing speedup? What were the sequential and parallel runtimes for this vector length?
+
+   global size = 262144,
+   seq time = 88.6 ms,
+   mpi time = 71.0 ms,
+   speed-up = 1.25
+
+
+7. Explain the differences, if any, of vector lengths and runtimes between the clusters. Your answer should show your knowledge of distributed parallel computing (MPI) given the structure of each cluster.
+
+a) for where speed-up starts:
+   vector length: decreases w.r.t. number of cores in each node
+       ( 32x1: global size = 2097152
+   	 8x4:  global size = 262144
+   	 1x32: global size = 16384   )
+
+b) for small vector length: (in this case, global = 2097152)
+   seq time: increases w.r.t. number of cores in each node
+   mpi time: decreases w.r.t. number of cores in each node
+   speed-up: increases w.r.t. number of cores in each node
+       ( 32x1:	0.62891 0.55664 1.12982
+         8x4:	0.70313 0.18359 3.82979
+	 1x32:	1.02344 0.10742 9.52727 )
+	 
+c) for large vector length: (in this case, global = 134217728)
+   seq time: decreases w.r.t. number of cores in each node
+   mpi time: increases w.r.t. number of cores in each node
+   speed-up: decreases w.r.t. number of cores in each node
+       ( 32x1:	96.5	14	6.89286
+         8x4:	90.125	17	5.30147
+	 1x32:	85.625	24	3.56771 )
+d) More cores in each node allows more processes running simultaneously.  Thus, the superiority of multi-core-node shows up quickly and obviously with small vector size.  However, when multiple processes are running simultaneously, the second round have to run after the first round ends.  Thus, time required to wait all processes in one node to complete increases as the vector size increases.  As a result, the performance of multi-core-node drops behind as the vector size becomes large.
